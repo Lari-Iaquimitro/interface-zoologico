@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import AnimalRequests from '../../fetch/AnimalRequests';
+import { FaTrash } from "react-icons/fa";
+
 
 function ListaAnimais() {
     const [animais, setAnimais] = useState(null);
@@ -57,7 +59,7 @@ function ListaAnimais() {
                                 <td>{animal.idadeanimal}</td>
                                 <td>{animal.generoanimal}</td>
                                 <td>{animal.envergadura}</td>
-                                <td onClick={() => deletarAnimal(animal.idanimal)}>Deletar</td>
+                                <td onClick={() => deletarAnimal(animal.idanimal)}><FaTrash /></td>
                             </tr>
                         ))
                     ) : (
