@@ -1,8 +1,9 @@
+body{
+    background-color: #F1EFB8 !important;
+}
 form {
     display: flex;
     flex-direction: column;
-
-    width: 75%;
     margin: 2.5% auto;
 }
 
@@ -13,6 +14,8 @@ input {
 }
 
 select {
+    background-color: black;
+    color: white;
     width: 50%;
 }
 
