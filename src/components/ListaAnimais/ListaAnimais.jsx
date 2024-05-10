@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
-import CardAnimal from '../../components/CardAnimal/CardAnimal';
+import AnimalRequests from '../../fetch/AnimalRequests';
 
 function ListaAnimais() {
     const [animais, setAnimais] = useState(null);
@@ -22,25 +22,42 @@ function ListaAnimais() {
         fetchData();
     }, []);
 
+
+    const deletarAnimal = async (id) => {
+        const confirma = window.confirm(`Deseja deletar o animal com id ${id}?`);
+        if(confirma){
+                if(await AnimalRequests.deletarAnimal(id)) {
+                    window.alert('Animal deletado com sucesso');
+                    window.location.reload();
+        } else{
+            window.alert('Erro ao deletar animal');
+        }
+        }
+
+    }
     return (
         <>
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th scope='col'>Nome</th>
-                        <th scope='col'>Idade</th>
-                        <th scope='col'>Gênero</th>
-                        <th scope='col'>Envergadura</th>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                        <th>Gênero</th>
+                        <th>Envergadura</th>
+                        <th>Ação</th>
                     </tr>
                 </thead>
                 <tbody>
                     {animais && animais.length > 0 ? (
                         animais.map(animal => (
                             <tr key={animal.idanimal}>
+                                <td>{animal.idanimal}</td>
                                 <td>{animal.nomeanimal}</td>
                                 <td>{animal.idadeanimal}</td>
                                 <td>{animal.generoanimal}</td>
                                 <td>{animal.envergadura}</td>
+                                <td onClick={() => deletarAnimal(animal.idanimal)}>Deletar</td>
                             </tr>
                         ))
                     ) : (

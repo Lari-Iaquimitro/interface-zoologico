@@ -11,17 +11,8 @@ function Animais() {
     // Recupera a lista de todos os animais do servidor
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await fetch('http://localhost:3000/listar-aves');
-                if (!response.ok) {
-                    throw new Error('Erro ao buscar servidor');
-                }
-                const listaAnimais = await response.json();
-                setAnimais(listaAnimais);
-            } catch (error) {
-                console.error('Erro: ', error);
+                setAnimais(await AnimalRequests.listaAnimais());
             }
-        }
 
         fetchData();
     }, []);
